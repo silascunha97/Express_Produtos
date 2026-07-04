@@ -19,10 +19,15 @@ const User = new EntitySchema({
     },
     password: {
       type: 'varchar',
+      select: false, // nunca retorna o hash da senha por padrão em find()/findOne(), mesmo via relations
     },
     role: {
       type: 'varchar',
       default: 'cliente',
+    },
+    claims: {
+      type: 'simple-array',
+      default: 'comprar',
     },
   },
 });

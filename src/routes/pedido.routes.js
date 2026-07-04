@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { criarPedido, listarMeusPedidos } = require('../controllers/pedido.controller');
 const { autenticarBearerToken } = require('../middlewares/auth.middleware');
+const { exigirClaim } = require('../middlewares/claims.middleware');
 const { validarPayloadPedido } = require('../middlewares/pedido.middleware');
 
 const router = Router();
@@ -40,8 +41,10 @@ const router = Router();
  *         description: Erro na validação de estoque ou payload inválido.
  *       401:
  *         description: Não autorizado. Token ausente ou inválido.
+ *       403:
+ *         description: Usuário autenticado não possui a claim 'comprar'.
  */
-router.post('/pedidos', autenticarBearerToken, validarPayloadPedido, criarPedido);
+router.post('/pedidos', autenticarBearerToken, exigirClaim('comprar'), validarPayloadPedido, criarPedido);
 
 /**
  * @openapi

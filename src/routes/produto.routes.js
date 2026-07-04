@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { autenticarBearerToken } = require('../middlewares/auth.middleware');
-const { permitirApenas } = require('../middlewares/role.middleware');
+const { exigirClaim } = require('../middlewares/claims.middleware');
+const { garantirDonoDoProduto } = require('../middlewares/posse.middleware');
 const produtoController = require('../controllers/produto.controller');
 
 const router = Router();
@@ -34,7 +35,7 @@ router.get('/produtos', produtoController.listarProdutos);
  *     tags:
  *       - Produtos
  *     summary: Cria um novo produto
- *     description: Persiste um novo produto no Postgres via TypeORM. Requer papel de administrador.
+ *     description: Persiste um novo produto no Postgres via TypeORM. Requer a claim 'vender' (ou papel de administrador). O produto criado fica vinculado ao usuário autenticado como vendedor.
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -53,11 +54,11 @@ router.get('/produtos', produtoController.listarProdutos);
  *       401:
  *         description: Token não fornecido ou inválido.
  *       403:
- *         description: Usuário autenticado não possui papel de administrador.
+ *         description: Usuário autenticado não possui a claim 'vender'.
  *       500:
  *         description: Erro interno ao criar produto.
  */
-router.post('/produtos', autenticarBearerToken, permitirApenas('admin'), produtoController.criarProduto);
+router.post('/produtos', autenticarBearerToken, exigirClaim('vender'), produtoController.criarProduto);
 
 /**
  * @openapi
@@ -95,7 +96,7 @@ router.get('/produtos/:id', produtoController.buscarProdutoPorId);
  *     tags:
  *       - Produtos
  *     summary: Atualiza um produto pelo ID
- *     description: Atualiza os campos de um produto existente no Postgres via TypeORM. Requer papel de administrador.
+ *     description: Atualiza os campos de um produto existente no Postgres via TypeORM. Requer a claim 'vender' e ser o dono do produto (ou papel de administrador).
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -121,13 +122,19 @@ router.get('/produtos/:id', produtoController.buscarProdutoPorId);
  *       401:
  *         description: Token não fornecido ou inválido.
  *       403:
- *         description: Usuário autenticado não possui papel de administrador.
+ *         description: Usuário autenticado não possui a claim 'vender' ou não é o dono do produto.
  *       404:
  *         description: Produto não encontrado.
  *       500:
  *         description: Erro interno ao atualizar produto.
  */
-router.put('/produtos/:id', autenticarBearerToken, permitirApenas('admin'), produtoController.atualizarProduto);
+router.put(
+  '/produtos/:id',
+  autenticarBearerToken,
+  exigirClaim('vender'),
+  garantirDonoDoProduto,
+  produtoController.atualizarProduto
+);
 
 /**
  * @openapi
@@ -136,7 +143,7 @@ router.put('/produtos/:id', autenticarBearerToken, permitirApenas('admin'), prod
  *     tags:
  *       - Produtos
  *     summary: Remove um produto pelo ID
- *     description: Remove um produto existente do Postgres via TypeORM. Requer papel de administrador.
+ *     description: Remove um produto existente do Postgres via TypeORM. Requer a claim 'vender' e ser o dono do produto (ou papel de administrador).
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -152,12 +159,18 @@ router.put('/produtos/:id', autenticarBearerToken, permitirApenas('admin'), prod
  *       401:
  *         description: Token não fornecido ou inválido.
  *       403:
- *         description: Usuário autenticado não possui papel de administrador.
+ *         description: Usuário autenticado não possui a claim 'vender' ou não é o dono do produto.
  *       404:
  *         description: Produto não encontrado.
  *       500:
  *         description: Erro interno ao remover produto.
  */
-router.delete('/produtos/:id', autenticarBearerToken, permitirApenas('admin'), produtoController.removerProduto);
+router.delete(
+  '/produtos/:id',
+  autenticarBearerToken,
+  exigirClaim('vender'),
+  garantirDonoDoProduto,
+  produtoController.removerProduto
+);
 
 module.exports = router;

@@ -23,8 +23,14 @@ async function criarProduto(req, res) {
     // 1. Pegue o repositório da Entidade
     const produtoRepository = AppDataSource.getRepository(Produto);
 
-    // 2. Crie uma nova instância da entidade Produto
-    const novoProduto = produtoRepository.create({ name, price, estoque });
+    // 2. Crie uma nova instância da entidade Produto, vinculada ao vendedor autenticado
+    // (o dono nunca é lido do corpo da requisição, só do usuário validado pelo JWT)
+    const novoProduto = produtoRepository.create({
+      name,
+      price,
+      estoque,
+      vendedor: { id: req.usuarioLogado.id },
+    });
 
     // 3. Salve o novo produto no banco de dados
     const produtoSalvo = await produtoRepository.save(novoProduto);
@@ -65,8 +71,8 @@ async function atualizarProduto(req, res) {
     // 1. Pegue o repositório da Entidade
     const produtoRepository = AppDataSource.getRepository(Produto);
 
-    // 2. Busque o produto pelo ID
-    const produto = await produtoRepository.findOne({ where: { id: parseInt(id) } });
+    // 2. O middleware garantirDonoDoProduto já buscou e validou o produto
+    const produto = req.produtoBuscado ?? await produtoRepository.findOne({ where: { id: parseInt(id) } });
 
     if (!produto) {
       return res.status(404).json({ error: 'Produto não encontrado.' });
@@ -94,8 +100,8 @@ async function removerProduto(req, res) {
     // 1. Pegue o repositório da Entidade
     const produtoRepository = AppDataSource.getRepository(Produto);
 
-    // 2. Busque o produto pelo ID
-    const produto = await produtoRepository.findOne({ where: { id: parseInt(id) } });
+    // 2. O middleware garantirDonoDoProduto já buscou e validou o produto
+    const produto = req.produtoBuscado ?? await produtoRepository.findOne({ where: { id: parseInt(id) } });
 
     if (!produto) {
       return res.status(404).json({ error: 'Produto não encontrado.' });

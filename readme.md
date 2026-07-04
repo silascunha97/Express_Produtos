@@ -1,74 +1,72 @@
-O arquivo Markdown completo para a documentação do seu projeto Node.js foi estruturado com base em todas as referências fornecidas, organizando o progresso atual, a arquitetura de pastas e os próximos passos de forma clara e profissional.
+# 🛒 E-Commerce & Marketplace API (Node.js) — Projetado com Rigor, Codificado na Zuera
 
-O conteúdo do seu arquivo `README.md` está pronto e estruturado abaixo:
+Este projeto consiste no desenvolvimento de uma API REST de e-commerce e marketplace construída do zero utilizando o ecossistema Node.js. Conduzido no formato **Full Cycle**, o projeto nasceu como um laboratório descontraído de estudos ("na zuera"), mas foi projetado, arquitetado e mantido sob o mais estrito rigor técnico e seriedade profissional.
 
-```markdown
-# 🛒 E-Commerce API (Node.js)
-
-Este projeto consiste no desenvolvimento de uma API REST completa para um e-commerce do zero, utilizando o ecossistema Node.js. O objetivo principal é consolidar conhecimentos práticos em arquitetura de software, modelagem de dados avançada, segurança e gerenciamento de infraestrutura em containers.
-
-A construção desta aplicação impõe desafios reais de regras de negócio complexas (como gerenciamento de estoque concorrente e checkout transacional) e segurança (autenticação e autorização baseada em papéis).
+O grande diferencial deste repositório não é apenas o código final, mas **como ele foi construído**. Ele é o resultado prático de uma mentoria dinâmica de Engenharia de Software, onde o desenvolvedor atuou como um investigador ativo de sistemas e os Agentes de IA operaram como professores assistentes de arquitetura.
 
 ---
 
-## 📊 Estado Atual do Projeto (Fundações Concluídas)
+## 🧠 A Dinâmica de Aprendizado: Aluno Crítico vs. Mentores de IA
 
-O motor e a infraestrutura base da aplicação já estão totalmente construídos e operacionais:
+O desenvolvimento não seguiu receitas prontas. Ele avançou através de ciclos onde o **Aluno trouxe a provocação de negócios e engenharia de sistemas**, e os **Professores de IA forneceram os blocos de infraestrutura e padrões de projeto**, sempre sob avaliação crítica do desenvolvedor.
 
-* **Infraestrutura:** Container PostgreSQL isolado e rodando via Docker.
-* **Segurança de Ambiente:** Configuração de arquivos `.env` para proteção de credenciais, livre de aspas e integrada ao processo do Node.js.
-* **Mapeamento de Dados (ORM):** Integração com o TypeORM (`DataSource`) utilizando `EntitySchema` em JavaScript puro, com sincronização automática ativa para o ambiente de desenvolvimento (`synchronize: true`).
-* **Documentação Dinâmica:** Swagger configurado de forma modular usando caminhos absolutos, pronto para leitura de metadados em JSDoc, incluindo o esquema de cadeado global (`Authorize`) para o padrão OAuth2 / JWT Bearer.
-* **Middlewares Globais e de Filtro:** Ingestão de logs com `morgan`, parsing de JSON nativo, isolamento de políticas de segurança de origem com `CORS`, criptografia com `bcrypt` e interceptador de tokens via `Passport.js` com validação manual JWT.
+### 💡 As Grandes Sacadas do Aluno (Os Diferenciais do Projeto)
+Enquanto a IA sugeria os caminhos convencionais de desenvolvimento, o senso investigativo do desenvolvedor trouxe sacadas que mudaram o rumo do sistema:
 
----
-
-## 🗺️ Trilha de Evolução do Sistema
-
-O desenvolvimento da camada de negócio e regras do e-commerce agora se divide em três fases lógicas e sequenciais:
-
-### 🧩 Fase 1: Modelagem das Entidades Essenciais
-Modelagem e criação dos esquemas ausentes no banco de dados através do `EntitySchema` do TypeORM para os quatro pilares fundamentais no diretório `src/entities/`:
-* **Usuários (`User`):** Clientes e administradores (já construído).
-* **Produtos (`Product`):** O catálogo de itens com id, nome, descrição, preço e estoque (já construído).
-* **Pedido (`Pedido.js`):** Tabela que guarda o cabeçalho e metadados da compra (id, data, valor_total, id_usuario).
-* **Item do Pedido (`ItemPedido.js`):** Tabela pivô que resolve o relacionamento de muitos-para-muitos (`N:M`) entre Pedidos e Produtos (guarda id, id_pedido, id_produto, quantidade e preco_unitario no momento da venda).
-
-### 🔑 Fase 2: Autenticação e Autorização (Middlewares)
-Aplicação de regras de acesso e controle granular nas rotas da API:
-* Criação de rotas de `POST /auth/register` e `POST /auth/login`.
-* Uso do pacote `bcrypt` para criptografar e salvar as senhas de forma segura no banco de dados.
-* Geração e validação de **JWT (JSON Web Tokens)**.
-* Criação de middleware de autorização baseado em perfis (**Roles**), garantindo que apenas usuários do tipo **Admin** possam gerenciar o catálogo (ex: criar novos produtos via `POST /produtos`), enquanto usuários do tipo **Cliente** possam apenas listá-los.
-
-### 🛒 Fase 3: Lógica de Carrinho e Estoque (Regras de Negócio)
-Implementação do endpoint crítico de checkout (`POST /pedidos`), onde o fluxo operacional deve ser totalmente seguro:
-1. Receber a lista de IDs de produtos e suas respectivas quantidades desejadas.
-2. Abrir uma **transação isolada** no banco de dados.
-3. Verificar a disponibilidade de estoque real para cada item selecionado.
-4. Decrementar o estoque dos produtos e consolidar o registro do Pedido e seus respectivos Itens.
+1. **Desmistificação do Erro Postgres do Driver:** Diante de uma quebra misteriosa de runtime (`NamedPlaceholdersNotSupportedError`), o aluno identificou cirurgicamente que a raiz do problema estava no conflito de placeholders do driver do Postgres que não aceita variáveis nomeadas (padrão Oracle/MySQL), forçando a adoção pura de repositórios do ORM ou queries indexadas dinamicamente (`$1`, `$2`).
+2. **Hibridismo de Negócios (A Sacada do Marketplace):** O aluno recusou o modelo engessado de Roles (onde um usuário é só comprador ou só vendedor). Ele propôs a sacada de que um usuário comum, em determinado momento, pode querer ativar seu modo vendedor sem perder o histórico ou permissão de comprador. Isso forçou uma mudança arquitetural para **RBAC + Claims**.
+3. **O Isolamento Absoluto do Swagger:** Ao perceber que os endpoints sumiam devido a ambiguidades de execução no Linux, o aluno provocou a refatoração baseada em caminhos absolutos com o módulo nativo `path` do Node, tornando a documentação imune ao diretório de onde o comando global do sistema é disparado.
 
 ---
 
-## 🛠️ Arquitetura de Pastas Avançada
+## 🗺️ As Fases de Aprendizado e Evolução
 
-A fim de suportar a escalabilidade do projeto e separar a responsabilidade de escuta das rotas das regras de negócio e manipulação do banco, adota-se a refatoração para o padrão **Controller**:
+### 🏗️ Fase 0: Fundações Estruturadas pelos Professores de IA
+Os mentores forneceram e auxiliaram na configuração do motor base do ecossistema:
+* **Docker & Postgres:** Criação de um ambiente reprodutível e isolado.
+* **TypeORM Limpo:** Configuração do `DataSource` nativo usando `EntitySchema` para manter o projeto legível em JavaScript puro, sem poluidores.
+* **Segurança de Escopo:** Ingestão de variáveis com `dotenv` (limpas de aspas que quebravam o interpretador do driver) e proteção de origens de requisições com políticas finas de **CORS**.
+
+### 🧩 Fase 1: Modelagem das Entidades Base e Relações Relacionais
+Modelagem guiada dos quatro pilares fundamentais no diretório `src/entities/`:
+* **Usuários (`User`) & Produtos (`Product`):** Estruturas com auto-incremento nativo (`generated: true`).
+* **Pedido (`Pedido.js`) & Item do Pedido (`ItemPedido.js`):** Implementação de um relacionamento Muitos para Muitos (`N:M`) decomposto, com uma tabela pivô que congela o preço histórico do produto (`preco_unitario`) para blindar o faturamento contra oscilações futuras do catálogo.
+
+### 🔑 Fase 2: Autenticação e Autorização Avançada (O Ecossistema de Claims)
+Evolução da barreira de segurança da API utilizando middlewares encadeados em formato de linha de montagem:
+* Uso de `bcrypt` para geração de hashes e segurança de senhas.
+* Implementação do fluxo **OAuth2 com JWT Bearer Token** (`Authorization: Bearer <token>`).
+* **O Diferencial de Autorização:** Criação de um middleware de autorização granular por **Claims** (`exigirClaim('vender')`), permitindo que um usuário transite organicamente entre comprar e expor itens no ecossistema sem quebrar as regras de segurança ou travar sua conta.
+
+### 🛒 Fase 3: Lógica de Checkout Transacional (Regras ACID)
+O ponto culminante do backend: o endpoint `POST /pedidos`.
+* Gerenciamento manual de transações usando `QueryRunner` do TypeORM.
+* O sistema abre a transação, checa atomicamente o estoque do produto, decrementa a quantidade e, em caso de inconsistência ou falta de itens, executa um **Rollback** completo, garantindo a integridade do banco de dados contra condições de corrida (*race conditions*).
+
+---
+
+## 🛠️ Arquitetura de Pastas de Alta Coesão
+
+A fim de suportar o crescimento para o Frontend, o projeto separa estritamente a escuta das rotas, os filtros middleware e as regras de negócio através do padrão **Controller**:
 
 ```text
 src/
 ├── config/
 │   ├── database.js     # Inicialização do TypeORM
-│   └── swagger.js      # Configuração do Swagger
-├── entities/           # Esquemas (EntitySchema) do banco de dados
+│   ├── swagger.js      # Configuração do Swagger
+│   └── passport.js     # Estratégias de login social / OAuth2
+├── entities/           # Mapeamento de tabelas (EntitySchema)
 │   ├── Produto.js
-│   ├── Usuario.js
+│   ├── User.js
 │   ├── Pedido.js
 │   └── ItemPedido.js
-├── controllers/        # Intermediários que lidam com req e res (regras de rota)
-│   └── produto.controller.js
-├── middlewares/        # Filtros (autenticação, logs, validações de acesso)
+├── controllers/        # Orquestradores de Regras de Negócio (req, res)
+│   ├── produto.controller.js
+│   └── pedido.controller.js
+├── middlewares/        # Interceptadores (Autenticação JWT, Logs, Claims)
 │   └── auth.middleware.js
-├── routes/             # Definição dos caminhos HTTP e Swagger JSDoc
+├── routes/             # Definição dos caminhos HTTP e anotações Swagger JSDoc
 │   ├── produto.routes.js
+│   ├── pedido.routes.js
 │   └── auth.routes.js
-└── app.js
+└── app.js              # Inicialização do Express e middlewares globais

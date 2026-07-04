@@ -86,7 +86,11 @@ router.post('/auth/login', async (req, res) => {
     const { email, password } = req.body;
     const userRepository = AppDataSource.getRepository(User);
 
-    const usuario = await userRepository.findOneBy({ email });
+    // password tem select: false na entidade, então precisa ser pedido explicitamente aqui
+    const usuario = await userRepository.findOne({
+      where: { email },
+      select: { id: true, name: true, email: true, password: true, role: true, claims: true },
+    });
     if (!usuario) return res.status(401).json({ error: 'Credenciais inválidas.' });
 
     // 💡 Compara a senha enviada com o hash salvo no banco
@@ -95,7 +99,7 @@ router.post('/auth/login', async (req, res) => {
 
     // Gera o token JWT incluindo informações úteis no payload (expira em 2 horas)
     const token = jwt.sign(
-      { id: usuario.id, email: usuario.email, role: usuario.role },
+      { id: usuario.id, email: usuario.email, role: usuario.role, claims: usuario.claims },
       process.env.JWT_SECRET,
       { expiresIn: '2h' }
     );

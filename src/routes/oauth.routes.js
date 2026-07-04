@@ -16,7 +16,7 @@ router.get('/auth/google/callback',
 
     // Gera o seu token JWT interno do E-commerce
     const token = jwt.sign(
-      { id: usuario.id, email: usuario.email, role: usuario.role },
+      { id: usuario.id, email: usuario.email, role: usuario.role, claims: usuario.claims },
       process.env.JWT_SECRET,
       { expiresIn: '2h' }
     );

@@ -35,6 +35,13 @@ const Produto = new EntitySchema({
       target: 'ItemPedido', // Nome da entidade alvo
       inverseSide: 'produto', // Nome do campo inverso lá na entidade ItemPedido
     },
+    // Muitos produtos pertencem a um único vendedor (Many-to-One)
+    vendedor: {
+      type: 'many-to-one',
+      target: 'Usuarios', // Nome da entidade registrado em Usuers.entities.js (name: 'Usuarios')
+      joinColumn: { name: 'id_vendedor' },
+      onDelete: 'CASCADE',
+    },
   },
 });
 
