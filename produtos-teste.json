@@ -1,0 +1,252 @@
+[
+  {
+    "name": "Notebook Dell Inspiron 15",
+    "price": 3499.9,
+    "estoque": 50
+  },
+  {
+    "name": "Mouse Gamer Logitech G203",
+    "price": 129.9,
+    "estoque": 50
+  },
+  {
+    "name": "Teclado Mecânico Redragon Kumara",
+    "price": 219,
+    "estoque": 50
+  },
+  {
+    "name": "Monitor LG 24' Full HD",
+    "price": 799,
+    "estoque": 50
+  },
+  {
+    "name": "Smartphone Samsung Galaxy S23",
+    "price": 4599,
+    "estoque": 50
+  },
+  {
+    "name": "Fone de Ouvido Bluetooth JBL Tune 510BT",
+    "price": 249.9,
+    "estoque": 50
+  },
+  {
+    "name": "Cadeira Gamer ThunderX3",
+    "price": 1099.9,
+    "estoque": 50
+  },
+  {
+    "name": "SSD Kingston NV2 1TB",
+    "price": 389.9,
+    "estoque": 50
+  },
+  {
+    "name": "Placa de Vídeo RTX 4060",
+    "price": 2299,
+    "estoque": 50
+  },
+  {
+    "name": "Processador Ryzen 5 5600X",
+    "price": 899,
+    "estoque": 50
+  },
+  {
+    "name": "Memória RAM Corsair Vengeance 16GB",
+    "price": 349,
+    "estoque": 50
+  },
+  {
+    "name": "Fonte Corsair 650W 80 Plus",
+    "price": 449,
+    "estoque": 50
+  },
+  {
+    "name": "Gabinete Gamer Aerocool",
+    "price": 299,
+    "estoque": 50
+  },
+  {
+    "name": "Webcam Logitech C920",
+    "price": 459,
+    "estoque": 50
+  },
+  {
+    "name": "Microfone Condensador HyperX QuadCast",
+    "price": 799,
+    "estoque": 50
+  },
+  {
+    "name": "Impressora HP DeskJet Ink Advantage",
+    "price": 549,
+    "estoque": 50
+  },
+  {
+    "name": "Roteador TP-Link Archer C6",
+    "price": 219.9,
+    "estoque": 50
+  },
+  {
+    "name": "HD Externo Seagate 2TB",
+    "price": 429,
+    "estoque": 50
+  },
+  {
+    "name": "Pendrive SanDisk 64GB",
+    "price": 39.9,
+    "estoque": 2
+  },
+  {
+    "name": "Carregador Portátil Xiaomi 20000mAh",
+    "price": 149,
+    "estoque": 50
+  },
+  {
+    "name": "Smartwatch Amazfit Bip 5",
+    "price": 349,
+    "estoque": 50
+  },
+  {
+    "name": "Caixa de Som JBL Charge 5",
+    "price": 899,
+    "estoque": 50
+  },
+  {
+    "name": "TV LED Samsung 50' 4K",
+    "price": 2799,
+    "estoque": 50
+  },
+  {
+    "name": "Console PlayStation 5",
+    "price": 3999,
+    "estoque": 50
+  },
+  {
+    "name": "Controle DualSense PS5",
+    "price": 449,
+    "estoque": 50
+  },
+  {
+    "name": "Cadeira de Escritório Ergonômica",
+    "price": 899.9,
+    "estoque": 50
+  },
+  {
+    "name": "Mesa para Computador 120cm",
+    "price": 599,
+    "estoque": 50
+  },
+  {
+    "name": "Luminária de Mesa LED",
+    "price": 89.9,
+    "estoque": 50
+  },
+  {
+    "name": "Suporte para Notebook Articulado",
+    "price": 119.9,
+    "estoque": 50
+  },
+  {
+    "name": "Hub USB-C 7 em 1",
+    "price": 169,
+    "estoque": 50
+  },
+  {
+    "name": "Cabo HDMI 2.1 2 metros",
+    "price": 49.9,
+    "estoque": 50
+  },
+  {
+    "name": "Adaptador Wi-Fi USB TP-Link",
+    "price": 79.9,
+    "estoque": 50
+  },
+  {
+    "name": "Bateria Externa Anker PowerCore",
+    "price": 199,
+    "estoque": 50
+  },
+  {
+    "name": "Tablet Samsung Galaxy Tab A9",
+    "price": 1199,
+    "estoque": 50
+  },
+  {
+    "name": "Leitor de Cartão SD/microSD",
+    "price": 34.9,
+    "estoque": 50
+  },
+  {
+    "name": "Mousepad Gamer XL",
+    "price": 59.9,
+    "estoque": 50
+  },
+  {
+    "name": "Headset Gamer HyperX Cloud Stinger",
+    "price": 349,
+    "estoque": 50
+  },
+  {
+    "name": "Câmera de Segurança Wi-Fi Intelbras",
+    "price": 189,
+    "estoque": 50
+  },
+  {
+    "name": "Fechadura Digital Yale",
+    "price": 899,
+    "estoque": 50
+  },
+  {
+    "name": "Ar Condicionado Split 9000 BTUs",
+    "price": 1899,
+    "estoque": 50
+  },
+  {
+    "name": "Ventilador de Coluna Mondial",
+    "price": 259,
+    "estoque": 50
+  },
+  {
+    "name": "Aspirador de Pó Robô Xiaomi",
+    "price": 1499,
+    "estoque": 50
+  },
+  {
+    "name": "Air Fryer Mondial 4L",
+    "price": 399,
+    "estoque": 50
+  },
+  {
+    "name": "Liquidificador Philco 1000W",
+    "price": 189.9,
+    "estoque": 50
+  },
+  {
+    "name": "Cafeteira Elétrica Nespresso",
+    "price": 549,
+    "estoque": 50
+  },
+  {
+    "name": "Panela de Pressão Elétrica",
+    "price": 329,
+    "estoque": 50
+  },
+  {
+    "name": "Micro-ondas Electrolux 20L",
+    "price": 649,
+    "estoque": 50
+  },
+  {
+    "name": "Geladeira Frost Free 400L",
+    "price": 3299,
+    "estoque": 50
+  },
+  {
+    "name": "Máquina de Lavar 12kg",
+    "price": 1899,
+    "estoque": 50
+  },
+  {
+    "name": "Ferro de Passar a Vapor Philips",
+    "price": 149.9,
+    "estoque": 50
+  }
+]

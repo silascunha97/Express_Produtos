@@ -24,6 +24,10 @@ const swaggerOptions = {
         name: 'Autenticação',
         description: 'Operações de registro e login de usuários',
       },
+      {
+        name: 'Pedidos',
+        description: 'Operações de checkout e histórico de pedidos',
+      },
     ],
     components: {
       securitySchemes: {
@@ -50,6 +54,10 @@ const swaggerOptions = {
               format: 'decimal',
               example: 199.9,
             },
+            estoque: {
+              type: 'integer',
+              example: 50,
+            },
           },
         },
         ProdutoInput: {
@@ -64,6 +72,10 @@ const swaggerOptions = {
               type: 'number',
               format: 'decimal',
               example: 199.9,
+            },
+            estoque: {
+              type: 'integer',
+              example: 50,
             },
           },
         },

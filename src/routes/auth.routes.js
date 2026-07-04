@@ -95,7 +95,7 @@ router.post('/auth/login', async (req, res) => {
 
     // Gera o token JWT incluindo informações úteis no payload (expira em 2 horas)
     const token = jwt.sign(
-      { id: usuario.id, email: usuario.email },
+      { id: usuario.id, email: usuario.email, role: usuario.role },
       process.env.JWT_SECRET,
       { expiresIn: '2h' }
     );

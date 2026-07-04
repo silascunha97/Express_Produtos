@@ -19,6 +19,22 @@ const Produto = new EntitySchema({
       precision: 10,
       scale: 2,
     },
+    estoque: {
+      type: 'int',
+      default: 0,
+    },
+    description: {
+      type: 'text',
+      nullable: true,
+    },
+  },
+  relations: {
+    // Um Produto pode estar em muitos ItensPedido (One-to-Many)
+    itensPedido: {
+      type: 'one-to-many',
+      target: 'ItemPedido', // Nome da entidade alvo
+      inverseSide: 'produto', // Nome do campo inverso lá na entidade ItemPedido
+    },
   },
 });
 

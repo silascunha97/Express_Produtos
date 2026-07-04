@@ -18,13 +18,13 @@ async function listarProdutos(req, res) {
 
 async function criarProduto(req, res) {
   try {
-    const { name, price } = req.body;
+    const { name, price, estoque } = req.body;
 
     // 1. Pegue o repositório da Entidade
     const produtoRepository = AppDataSource.getRepository(Produto);
 
     // 2. Crie uma nova instância da entidade Produto
-    const novoProduto = produtoRepository.create({ name, price });
+    const novoProduto = produtoRepository.create({ name, price, estoque });
 
     // 3. Salve o novo produto no banco de dados
     const produtoSalvo = await produtoRepository.save(novoProduto);
@@ -60,7 +60,7 @@ async function buscarProdutoPorId(req, res) {
 async function atualizarProduto(req, res) {
   try {
     const { id } = req.params;
-    const { name, price } = req.body;
+    const { name, price, estoque } = req.body;
 
     // 1. Pegue o repositório da Entidade
     const produtoRepository = AppDataSource.getRepository(Produto);
@@ -75,6 +75,7 @@ async function atualizarProduto(req, res) {
     // 3. Atualize os campos do produto
     produto.name = name !== undefined ? name : produto.name;
     produto.price = price !== undefined ? price : produto.price;
+    produto.estoque = estoque !== undefined ? estoque : produto.estoque;
 
     // 4. Salve as alterações no banco de dados
     const produtoAtualizado = await produtoRepository.save(produto);
