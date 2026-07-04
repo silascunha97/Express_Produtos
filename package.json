@@ -1,0 +1,27 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14",
+    "reflect-metadata": "^0.2.2",
+    "swagger-ui": "^5.32.8",
+    "typeorm": "^1.0.0"
+  },
+  "dependencies": {
+    "morgan": "^1.11.0",
+    "pg": "^8.22.0",
+    "swagger-jsdoc": "^6.3.0",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
