@@ -20,8 +20,19 @@ const swaggerOptions = {
         name: 'Produtos',
         description: 'Operações relacionadas aos produtos',
       },
+      {
+        name: 'Autenticação',
+        description: 'Operações de registro e login de usuários',
+      },
     ],
     components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
       schemas: {
         Produto: {
           type: 'object',
@@ -54,6 +65,23 @@ const swaggerOptions = {
               format: 'decimal',
               example: 199.9,
             },
+          },
+        },
+        UsuarioCadastro: {
+          type: 'object',
+          required: ['name', 'email', 'password'],
+          properties: {
+            name: { type: 'string', example: 'Augusto' },
+            email: { type: 'string', format: 'email', example: 'augusto@email.com' },
+            password: { type: 'string', format: 'password', example: 'senha123' },
+          },
+        },
+        UsuarioRespostaLogin: {
+          type: 'object',
+          properties: {
+            token_type: { type: 'string', example: 'Bearer' },
+            access_token: { type: 'string', example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' },
+            expires_in: { type: 'string', example: '2h' },
           },
         },
       },

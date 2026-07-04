@@ -14,11 +14,19 @@
   "devDependencies": {
     "express": "^5.2.1",
     "nodemon": "^3.1.14",
+    "passport": "^0.7.0",
+    "passport-apple": "^2.0.2",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-instagram": "^1.0.0",
     "reflect-metadata": "^0.2.2",
     "swagger-ui": "^5.32.8",
     "typeorm": "^1.0.0"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "jsonwebtoken": "^9.0.3",
     "morgan": "^1.11.0",
     "pg": "^8.22.0",
     "swagger-jsdoc": "^6.3.0",

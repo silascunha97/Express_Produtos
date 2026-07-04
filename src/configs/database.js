@@ -1,17 +1,20 @@
 require('reflect-metadata');
 const { DataSource } = require('typeorm');
-const { Produto } = require('../entities/Product_entities'); // Vamos criar a entidade a seguir
+const { Produto } = require('../entities/Product.entities'); // Vamos criar a entidade a seguir
+const { User } = require('../entities/Usuers.entities'); // Vamos criar a entidade a seguir
+
 
 const AppDataSource = new DataSource({
-  type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'augusto',
-  password: 'ApoloCreed',
-  database: 'api_produtos',
-  synchronize: true, // Em desenvolvimento, cria/atualiza as tabelas automaticamente. Nunca use true em produção!
-  logging: false,    // Altere para true se quiser ver os SQLs gerados no terminal
-  entities: [Produto],
+type: process.env.DB_TYPE || 'postgres',
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT || '5432', 10), // Garante que a porta seja um número inteiro
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  // Mantém a sincronização dinâmica baseada no ambiente (false em produção)
+  synchronize: process.env.NODE_ENV === 'development', 
+  logging: false,
+  entities: [Produto, User],
   subscribers: [],
   migrations: [],
 });

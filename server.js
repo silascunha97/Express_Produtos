@@ -1,3 +1,6 @@
+require('dotenv').config();
+
+
 const app = require('./src/app');
 const AppDataSource = require('./src/configs/database');
 
