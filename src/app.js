@@ -5,11 +5,12 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 //configs
 const swaggerDocs = require('./configs/swagger');
+const passport = require('./configs/passport'); // Importa a configuração que criamos
+//rotas
 const produtoRoutes = require('./routes/produto.routes');
 const authRoutes = require('./routes/auth.routes');
-const passport = require('./configs/passport'); // Importa a configuração que criamos
 const oauthRoutes = require('./routes/oauth.routes');
-
+const pedidoRoutes = require('./routes/pedido.routes');
 
 
 const app = express();
@@ -30,6 +31,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 // Rotas da Aplicação
 app.use(produtoRoutes);
 app.use(authRoutes); // Adiciona as rotas de autenticação
+app.use(pedidoRoutes); // Adiciona as rotas de pedidos
 app.use(passport.initialize()); //Inicializa o ciclo de vida do Passport
 
 // Fallback para rotas não encontradas
